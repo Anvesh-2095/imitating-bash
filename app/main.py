@@ -8,11 +8,15 @@ def main():
         sys.stdout.write("$ ")  # maybe we are using this to write instead of print as that appends and extra newline
         sys.stdout.flush()
 
-        list_of_commands = []
-        command = input()
+        list_of_commands = ['exit']
+        statement = input()
 
+        command = statement.split()[0]
         if command not in list_of_commands:
             print(command + ": command not found")
+            continue
+        if command == 'exit':
+            break
 
 if __name__ == "__main__":
     main()
