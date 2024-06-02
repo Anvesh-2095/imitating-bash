@@ -25,7 +25,7 @@ def main():
             if sub_command in list_of_commands:
                 print(sub_command + " is a shell builtin")
             else:
-                print(sub_command + "not found")
+                print(sub_command + " not found")
                 continue
 
 if __name__ == "__main__":
