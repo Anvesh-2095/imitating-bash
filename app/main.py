@@ -24,6 +24,8 @@ def main():
             sub_command = statement.split()[1]
             if sub_command in list_of_commands:
                 print(sub_command + " is a shell builtin")
+            elif sub_command in sys.path:
+                print(sub_command + " is " + sys.path + sub_command)
             else:
                 print(sub_command + " not found")
                 continue
