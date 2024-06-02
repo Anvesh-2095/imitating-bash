@@ -18,7 +18,7 @@ def main():
         if command == 'exit':
             break
         if command == 'echo':
-            print(''.join(statement.split()[1:]))
+            print(' '.join(statement.split()[1:]))
             continue
 
 if __name__ == "__main__":
