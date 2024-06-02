@@ -24,10 +24,16 @@ def main():
             sub_command = statement.split()[1]
             if sub_command in list_of_commands:
                 print(sub_command + " is a shell builtin")
-            elif sub_command in sys.path:
-                print(sub_command + " is " + sys.path + sub_command)
+                continue
             else:
-                print(sub_command + " not found")
+                found = False
+                for path in sys.path:
+                    if sub_command in path:
+                        print(sub_command + " is " + path)
+                        found = True
+                        break
+                if not found:
+                    print(sub_command + " not found")
                 continue
 
 if __name__ == "__main__":
