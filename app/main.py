@@ -15,7 +15,7 @@ def is_command_present(command, list_of_commands=[]):
         if isfile(join(path, command)):
             result.append(True)
             result.append(join(path, command))
-
+    result[0] = False
     return result
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
