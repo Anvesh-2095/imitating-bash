@@ -1,5 +1,7 @@
 import sys
-
+import os
+import os.path
+from os.path import isfile, isdir, join
 
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
@@ -27,9 +29,10 @@ def main():
                 continue
             else:
                 found = False
-                for path in sys.path:
-                    if sub_command in path:
-                        print(sub_command + " is " + path)
+                paths = os.environ['PATH'].split(os.pathsep)
+                for path in paths:
+                    if isfile(join(path, sub_command)):
+                        print(sub_command + " is " + join(path, sub_command))
                         found = True
                         break
                 if not found:
