@@ -51,7 +51,7 @@ def main():
             if address == '~':
                 user = os.uname().nodename
                 print(user)
-                address = os.pathsep + 'home' + os.pathsep + user
+                address = join('', 'home', user)
                 print(address)
                 # os.chdir(address)
                 continue
