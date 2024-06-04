@@ -17,7 +17,7 @@ def main():
         sys.stdout.write("$ ")  # maybe we are using this to write instead of print as that appends and extra newline
         sys.stdout.flush()
 
-        list_of_commands = ['exit', 'echo', 'type']
+        list_of_commands = ['exit', 'echo', 'type', 'pwd']
         statement = input()
 
         command = statement.split()[0]
@@ -43,6 +43,9 @@ def main():
                 else:
                     print(sub_command + " not found")
                 continue
+        elif command == 'pwd':
+            print(os.getcwd())
+            continue
         else:
             try:
                 subprocess.run(statement.split(' '))
