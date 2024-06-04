@@ -50,7 +50,7 @@ def main():
             try:
                 os.chdir(statement.split()[1])
             except FileNotFoundError as err:
-                print("non-existing-directory: No such file or directory")
+                print(f"{statement.split()[1]}: No such file or directory")
 
         else:
             try:
