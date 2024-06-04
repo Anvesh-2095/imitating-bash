@@ -47,10 +47,16 @@ def main():
             print(os.getcwd())
             continue
         elif command == 'cd':
+            address = statement.split()[1]
+            if address == '~':
+                user = os.uname().nodename
+                address = os.pathsep + 'home' + os.pathsep + user
+                os.chdir(address)
+                continue
             try:
-                os.chdir(statement.split()[1])
+                os.chdir(address)
             except FileNotFoundError as err:
-                print(f"{statement.split()[1]}: No such file or directory")
+                print(f"{address}: No such file or directory")
 
         else:
             try:
