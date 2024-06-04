@@ -49,7 +49,7 @@ def main():
         elif command == 'cd':
             try:
                 os.chdir(statement.split()[1])
-            except NotADirectoryError as err:
+            except FileNotFoundError as err:
                 print("non-existing-directory: No such file or directory")
 
         else:
