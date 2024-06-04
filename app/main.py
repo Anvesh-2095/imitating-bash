@@ -22,10 +22,12 @@ def main():
         statement = input()
 
         command = statement.split()[0]
-        if command not in list_of_commands and not is_command_present(command)[0]:
-            print(command + ": command not found")
-            continue
-        elif command == 'exit':
+        # if command not in list_of_commands: #and not is_command_present(command)[0]
+        #                             # this part was commented because I was unable to handle the case when the
+        #                             # command is present on the path but extension was not given by executer.
+        #     print(command + ": command not found")
+        #     continue
+        if command == 'exit':
             break
         elif command == 'echo':
             print(' '.join(statement.split()[1:]))
@@ -45,7 +47,11 @@ def main():
                     print(sub_command + " not found")
                 continue
         else:
-            subprocess.run(statement)
+            try:
+                subprocess.run(statement)
+            except Exception as e:
+                print(command + ": command not found")
+                continue
 
 if __name__ == "__main__":
     main()
