@@ -48,7 +48,7 @@ def main():
                 continue
         else:
             try:
-                subprocess.run(statement)
+                subprocess.system(statement)
             except Exception as e:
                 print(command + ": command not found")
                 continue
