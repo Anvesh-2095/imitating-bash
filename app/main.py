@@ -5,12 +5,11 @@ from os.path import isfile, isdir, join
 import subprocess
 
 def find_in_path(command):
-    result = [False]
+    location = None
     for path in os.environ['PATH'].split(os.pathsep):
-        if isfile(join(path, command)):
-            result[0] = True
-            result.append(os.path.join(path, command))
-    return result
+        if isfile(os.path.join(path, command)):
+            location = os.path.join(path, command)
+    return location
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
 
@@ -38,12 +37,10 @@ def main():
                 print(sub_command + " is a shell builtin")
                 continue
             else:
-                result = find_in_path(sub_command)
-                found = result[0]
-                if found:
-                    path = result[1]
-                    print(sub_command + " is " + join(path, sub_command))
-                if not found:
+                location = find_in_path(sub_command)
+                if location:
+                    print(sub_command + " is " + location)
+                else:
                     print(sub_command + " not found")
                 continue
         else:
@@ -52,6 +49,7 @@ def main():
             except FileNotFoundError as err:
                 print(command + ": command not found")
             continue
+
 
 if __name__ == "__main__":
     main()
