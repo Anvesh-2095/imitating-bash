@@ -47,7 +47,11 @@ def main():
             print(os.getcwd())
             continue
         elif command == 'cd':
-            os.chdir(statement.split()[1])
+            try:
+                os.chdir(statement.split()[1])
+            except NotADirectoryError as err:
+                print("non-existing-directory: No such file or directory")
+
         else:
             try:
                 subprocess.run(statement.split(' '))
