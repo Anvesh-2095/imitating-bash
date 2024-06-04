@@ -17,7 +17,7 @@ def main():
         sys.stdout.write("$ ")  # maybe we are using this to write instead of print as that appends and extra newline
         sys.stdout.flush()
 
-        list_of_commands = ['exit', 'echo', 'type', 'pwd']
+        list_of_commands = ['exit', 'echo', 'type', 'pwd', 'cd']
         statement = input()
 
         command = statement.split()[0]
@@ -46,6 +46,8 @@ def main():
         elif command == 'pwd':
             print(os.getcwd())
             continue
+        elif command == 'cd':
+            os.chdir(statement.split()[1])
         else:
             try:
                 subprocess.run(statement.split(' '))
