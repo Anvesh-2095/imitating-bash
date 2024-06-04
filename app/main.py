@@ -48,7 +48,7 @@ def main():
                 continue
         else:
             try:
-                subprocess.run(statement)
+                subprocess.run(statement.split(' '))
             except FileNotFoundError as err:
                 print(command + ": command not found")
             continue
