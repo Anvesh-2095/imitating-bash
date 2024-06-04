@@ -50,8 +50,12 @@ def main():
             address = statement.split()[1]
             if address == '~':
                 user = os.getlogin()
+                print(user)
                 address = join('', 'home', user)
-                os.chdir(address)
+                try:
+                    os.chdir(address)
+                except FileNotFoundError as err:
+                    print(f"{address}: No such file or directory")
                 continue
             try:
                 os.chdir(address)
