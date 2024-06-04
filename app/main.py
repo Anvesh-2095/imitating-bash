@@ -50,8 +50,10 @@ def main():
             address = statement.split()[1]
             if address == '~':
                 user = os.uname().nodename
+                print(user)
                 address = os.pathsep + 'home' + os.pathsep + user
-                os.chdir(address)
+                print(address)
+                # os.chdir(address)
                 continue
             try:
                 os.chdir(address)
