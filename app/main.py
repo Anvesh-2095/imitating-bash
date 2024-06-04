@@ -50,6 +50,7 @@ def main():
             try:
                 subprocess.run(statement)
             except FileNotFoundError as err:
+                print(err)
                 print(command + ": command not found")
             continue
 
