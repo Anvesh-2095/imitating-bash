@@ -49,11 +49,9 @@ def main():
         elif command == 'cd':
             address = statement.split()[1]
             if address == '~':
-                user = os.uname().nodename
-                print(user)
+                user = os.getlogin()
                 address = join('', 'home', user)
-                print(address)
-                # os.chdir(address)
+                os.chdir(address)
                 continue
             try:
                 os.chdir(address)
