@@ -5,17 +5,11 @@ from os.path import isfile, isdir, join
 import subprocess
 
 def is_command_present(command, list_of_commands=[]):
-    result = []
-    if command in list_of_commands:
-        result[0] = True
-        result[1] = command
-        return result
-
+    result = [False]
     for path in os.environ['PATH'].split(os.pathsep):
         if isfile(join(path, command)):
-            result.append(True)
+            result[0] = True
             result.append(join(path, command))
-    result[0] = False
     return result
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
@@ -28,7 +22,7 @@ def main():
         statement = input()
 
         command = statement.split()[0]
-        if is_command_present(command, list_of_commands):
+        if command not in list_of_commands and not is_command_present(command)[0]:
             print(command + ": command not found")
             continue
         elif command == 'exit':
@@ -51,9 +45,7 @@ def main():
                     print(sub_command + " not found")
                 continue
         else:
-            result = is_command_present(command)
-            path = result[1]
-            subprocess.run(join(path, command))
+            subprocess.run(statement)
 
 if __name__ == "__main__":
     main()
