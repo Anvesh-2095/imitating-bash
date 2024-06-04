@@ -4,12 +4,12 @@ import os.path
 from os.path import isfile, isdir, join
 import subprocess
 
-def find_in_path(command, list_of_commands=[]):
+def find_in_path(command):
     result = [False]
     for path in os.environ['PATH'].split(os.pathsep):
         if isfile(join(path, command)):
             result[0] = True
-            result.append(join(path, command))
+            result.append(os.path.join(path, command))
     return result
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
@@ -48,7 +48,7 @@ def main():
                 continue
         else:
             try:
-                subprocess.run(statement)
+                subprocess.run(statement.split(' '))
             except FileNotFoundError as err:
                 print(command + ": command not found")
             continue
