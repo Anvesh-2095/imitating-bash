@@ -4,7 +4,7 @@ import os.path
 from os.path import isfile, isdir, join
 import subprocess
 
-def is_command_present(command, list_of_commands=[]):
+def find_in_path(command, list_of_commands=[]):
     result = [False]
     for path in os.environ['PATH'].split(os.pathsep):
         if isfile(join(path, command)):
@@ -38,7 +38,7 @@ def main():
                 print(sub_command + " is a shell builtin")
                 continue
             else:
-                result = is_command_present(sub_command)
+                result = find_in_path(sub_command)
                 found = result[0]
                 if found:
                     path = result[1]
@@ -48,10 +48,10 @@ def main():
                 continue
         else:
             try:
-                subprocess.system(statement)
-            except Exception as e:
+                subprocess.run(statement)
+            except FileNotFoundError as err:
                 print(command + ": command not found")
-                continue
+            continue
 
 if __name__ == "__main__":
     main()
