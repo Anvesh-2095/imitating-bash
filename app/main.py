@@ -49,17 +49,22 @@ def main():
         elif command == 'cd':
             address = statement.split()[1]
             if address == '~':
-                user = os.getlogin()
-                print(user)
-                address = join('', 'home', user)
+                # user = os.getlogin()
+                # print(user)
+                # address = join('', 'home', user)
+                address = os.getenv("HOME")
                 try:
                     os.chdir(address)
                 except FileNotFoundError as err:
+                    print(f"{address}: No such file or directory")
+                except NotADirectoryError:
                     print(f"{address}: No such file or directory")
                 continue
             try:
                 os.chdir(address)
             except FileNotFoundError as err:
+                print(f"{address}: No such file or directory")
+            except NotADirectoryError:
                 print(f"{address}: No such file or directory")
 
         else:
