@@ -17,7 +17,7 @@ def main():
         sys.stdout.write("$ ")  # maybe we are using this to write instead of print as that appends and extra newline
         sys.stdout.flush()
 
-        list_of_commands = ['exit', 'echo', 'type', 'pwd', 'cd']
+        list_of_commands = ['exit', 'echo', 'type', 'pwd', 'cd', 'touch']
         statement = input()
 
         command = statement.split()[0]
@@ -46,13 +46,18 @@ def main():
         elif command == 'pwd':
             print(os.getcwd())
             continue
+        elif command == 'touch':
+            filename = statement.split()[1]
+            file = open(filename, 'w')
+            file.close()
         elif command == 'cd':
             address = statement.split()[1]
             if address == '~':
-                # user = os.getlogin()
-                # print(user)
-                # address = join('', 'home', user)
-                address = os.getenv("HOME")
+                if os.name == 'nt':
+                    user = os.getlogin()
+                    address = f"C:\\Users\\{user}"
+                else:
+                    address = os.getenv("HOME")
                 try:
                     os.chdir(address)
                 except FileNotFoundError as err:
